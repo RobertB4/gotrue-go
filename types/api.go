@@ -130,7 +130,7 @@ type AdminGetUserResponse struct {
 }
 
 type AdminUpdateUserRequest struct {
-	UserID uuid.UUID `json:"-"`
+	UserID string `json:"-"`
 
 	Aud          string                 `json:"aud,omitempty"`
 	Role         string                 `json:"role,omitempty"`
