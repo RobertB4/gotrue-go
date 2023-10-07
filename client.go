@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/supabase-community/gotrue-go/endpoints"
+	"github.com/RobertB4/gotrue-go/endpoints"
 )
 
 var (
@@ -28,9 +28,9 @@ type client struct {
 //
 // This function does not validate your project reference. Requests will fail
 // if you pass in an invalid project reference.
-func New(projectReference string, apiKey string) Client {
+func New(baseURL string, apiKey string) Client {
 	return &client{
-		Client: endpoints.New(projectReference, apiKey),
+		Client: endpoints.New(baseURL, apiKey),
 	}
 }
 
