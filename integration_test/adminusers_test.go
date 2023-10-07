@@ -107,8 +107,8 @@ func TestAdminUpdateUser(t *testing.T) {
 	require := require.New(t)
 
 	// Need admin credential
-	_, err := client.AdminUpdateUser("", types.AdminUpdateUserRequest{
-		UserID: uuid.Nil,
+	_, err := client.AdminUpdateUser(types.AdminUpdateUserRequest{
+		UserID: uuid.Nil.String(),
 	})
 	assert.Error(err)
 
@@ -127,8 +127,8 @@ func TestAdminUpdateUser(t *testing.T) {
 	require.Regexp(uuidRegex, createResp.ID)
 
 	// Update the user
-	resp, err := admin.AdminUpdateUser("", types.AdminUpdateUserRequest{
-		UserID: createResp.ID,
+	resp, err := admin.AdminUpdateUser(types.AdminUpdateUserRequest{
+		UserID: createResp.ID.String(),
 		Role:   "admin",
 	})
 	require.NoError(err)
@@ -136,8 +136,8 @@ func TestAdminUpdateUser(t *testing.T) {
 	assert.Equal(resp.Role, "admin")
 
 	// Cannot update a user that doesn't exist
-	_, err = admin.AdminUpdateUser("", types.AdminUpdateUserRequest{
-		UserID: uuid.New(),
+	_, err = admin.AdminUpdateUser(types.AdminUpdateUserRequest{
+		UserID: uuid.New().String(),
 	})
 	assert.Error(err)
 }
