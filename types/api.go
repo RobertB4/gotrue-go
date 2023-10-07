@@ -385,7 +385,8 @@ type OTPRequest struct {
 }
 
 type RecoverRequest struct {
-	Email string `json:"email"`
+	Email       string  `json:"email"`
+	RedirectURL *string `json:"redirectUrl"`
 
 	// Provide Captcha token if enabled.
 	SecurityEmbed

@@ -117,7 +117,7 @@ func (c *Client) AdminGetUser(req types.AdminGetUserRequest) (*types.AdminGetUse
 // PUT /admin/users/{user_id}
 //
 // Update a user by their user_id.
-func (c *Client) AdminUpdateUser(req types.AdminUpdateUserRequest) (*types.AdminUpdateUserResponse, error) {
+func (c *Client) AdminUpdateUser(jwt string, req types.AdminUpdateUserRequest) (*types.AdminUpdateUserResponse, error) {
 	path := fmt.Sprintf("%s/%s", adminUsersPath, req.UserID)
 	body, err := json.Marshal(req)
 	if err != nil {
@@ -128,6 +128,8 @@ func (c *Client) AdminUpdateUser(req types.AdminUpdateUserRequest) (*types.Admin
 	if err != nil {
 		return nil, err
 	}
+	apiKey := r.Header.Get("apiKey")
+	r.Header.Add("Authorization", "Bearer "+apiKey)
 
 	resp, err := c.client.Do(r)
 	if err != nil {

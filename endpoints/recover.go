@@ -24,7 +24,12 @@ func (c *Client) Recover(req types.RecoverRequest) error {
 		return err
 	}
 
-	r, err := c.newRequest(recoverPath, http.MethodPost, bytes.NewBuffer(body))
+	apiURL := recoverPath
+	if req.RedirectURL != nil {
+		apiURL += "?redirect_to=" + *req.RedirectURL
+	}
+
+	r, err := c.newRequest(apiURL, http.MethodPost, bytes.NewBuffer(body))
 	if err != nil {
 		return err
 	}

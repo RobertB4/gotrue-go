@@ -107,7 +107,7 @@ type Client interface {
 	// PUT /admin/users/{user_id}
 	//
 	// Update a user by their user_id.
-	AdminUpdateUser(req types.AdminUpdateUserRequest) (*types.AdminUpdateUserResponse, error)
+	AdminUpdateUser(jwt string, req types.AdminUpdateUserRequest) (*types.AdminUpdateUserResponse, error)
 	// DELETE /admin/users/{user_id}
 	//
 	// Delete a user by their user_id.
